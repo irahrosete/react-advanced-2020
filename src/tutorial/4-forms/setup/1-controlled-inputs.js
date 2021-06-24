@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 // JS
 // const input = document.getElementById('myText');
 // const inputValue = input.value
@@ -6,7 +6,41 @@ import React, { useState } from 'react';
 // value, onChange
 
 const ControlledInputs = () => {
-  return <h1>controlled inputs</h1>;
-};
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
 
-export default ControlledInputs;
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(name, email)
+  }
+
+  return (
+    <>
+      <form className='form' onSubmit={handleSubmit}>
+        <div className='form-control'>
+          <label htmlFor='name'>Name : </label>
+          <input
+            type='text'
+            id='name'
+            name='name'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className='form-control'>
+          <label htmlFor='email'>Email : </label>
+          <input
+            type='email'
+            id='email'
+            name='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <button type='submit'>Add Person</button>
+      </form>
+    </>
+  )
+}
+
+export default ControlledInputs
