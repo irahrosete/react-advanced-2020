@@ -2,5 +2,6 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "javascript.format.semicolons": "remove",
-  "prettier.semi": false
+  "prettier.semi": false,
+  "typescript.format.semicolons": "remove"
 }
