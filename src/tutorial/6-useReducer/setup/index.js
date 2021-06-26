@@ -15,10 +15,8 @@ const reducer = (state, action) => {
       }
     }
     case 'NO_VALUE': {
-      const newPeople = [...state.people, action.data]
       return {
         ...state,
-        people: newPeople,
         isModalOpen: true,
         modalContent: 'please enter a value',
       }
@@ -50,7 +48,7 @@ const Index = () => {
       dispatch({ type: 'ADD_ITEM', data: newPerson })
       setName('')
     } else {
-      dispatch({ type: 'NO_VALUE', data: '' })
+      dispatch({ type: 'NO_VALUE' })
     }
   }
 
