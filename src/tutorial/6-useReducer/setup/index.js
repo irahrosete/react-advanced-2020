@@ -1,36 +1,8 @@
 import React, { useState, useEffect, useRef, useReducer } from 'react'
 import Modal from './Modal'
 import { data } from '../../../data'
+import { reducer } from './reducer'
 // reducer function
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD_ITEM': {
-      const newPeople = [...state.people, action.data]
-      return {
-        ...state,
-        people: newPeople,
-        isModalOpen: true,
-        modalContent: 'item added',
-      }
-    }
-    case 'NO_VALUE': {
-      return {
-        ...state,
-        isModalOpen: true,
-        modalContent: 'please enter a value',
-      }
-    }
-    case 'CLOSE_MODAL': {
-      return {
-        ...state,
-        isModalOpen: false,
-      }
-    }
-    default:
-      return state
-  }
-}
 
 const initialState = {
   people: [],
@@ -73,24 +45,35 @@ const Index = () => {
       {isModalOpen && (
         <Modal modalContent={modalContent} closeModal={closeModal} />
       )}
+      <h2>Grocery List</h2>
       <div className='form'>
         <form onSubmit={handleSubmit}>
-          <input
-            type='text'
-            ref={nameContainer}
-            value={name}
-            onChange={handleChange}
-          />
+          <div>
+            <input
+              type='text'
+              ref={nameContainer}
+              value={name}
+              onChange={handleChange}
+            />
+          </div>
           <button>add</button>
         </form>
       </div>
       {people.map((person) => {
         return (
-          <div key={person.id}>
+          <div key={person.id} className='item'>
             <h4>{person.name}</h4>
+            <button
+              onClick={() => dispatch({ type: 'REMOVE_ITEM', data: person.id })}
+            >
+              remove
+            </button>
           </div>
         )
       })}
+      <button className='clear' onClick={() => dispatch({ type: 'CLEAR_ALL' })}>
+        Clear all
+      </button>
     </>
   )
 }
