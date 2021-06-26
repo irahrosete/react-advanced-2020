@@ -21,6 +21,12 @@ const reducer = (state, action) => {
         modalContent: 'please enter a value',
       }
     }
+    case 'CLOSE_MODAL': {
+      return {
+        ...state,
+        isModalOpen: false,
+      }
+    }
     default:
       return state
   }
@@ -52,6 +58,10 @@ const Index = () => {
     }
   }
 
+  const closeModal = () => {
+    dispatch({ type: 'CLOSE_MODAL' })
+  }
+
   const nameContainer = useRef(null)
 
   useEffect(() => {
@@ -60,7 +70,9 @@ const Index = () => {
 
   return (
     <>
-      {isModalOpen && <Modal modalContent={modalContent} />}
+      {isModalOpen && (
+        <Modal modalContent={modalContent} closeModal={closeModal} />
+      )}
       <div className='form'>
         <form onSubmit={handleSubmit}>
           <input
